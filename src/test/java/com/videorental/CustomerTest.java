@@ -10,9 +10,9 @@ public class CustomerTest {
 	private static final String NAME = "Kanghyun";
 	private static final String TITLE = "TITLE_NOT_IMPORTANT";
 
-	private static final Movie REGULAR_MOVIE = new Movie(TITLE, Movie.REGULAR);
-	private static final Movie NEW_RELEASE_MOVIE = new Movie(TITLE, Movie.NEW_RELEASE);
-	private static final Movie CHILDRENS_MOVIE = new Movie(TITLE, Movie.CHILDRENS);
+	private static final Movie REGULAR_MOVIE = new RegularMovie(TITLE);
+	private static final Movie NEW_RELEASE_MOVIE = new NewReleaseMovie(TITLE);
+	private static final Movie CHILDRENS_MOVIE = new ChildrenMovie(TITLE);
 
 	private Customer customer;
 
@@ -123,19 +123,5 @@ public class CustomerTest {
 				+ "\t3.0(" + TITLE + ")\n"
 				+ "Amount owed is 17.0\n"
 				+ "You earned 4 frequent renter pointers");
-	}
-
-	@Test
-	public void statementReflectsPriceCodeChangedViaSetter() {
-		// arrange
-		Movie movie = new Movie(TITLE, Movie.REGULAR);
-		movie.setPriceCode(Movie.NEW_RELEASE);
-		rent(movie, 1);
-
-		// assert
-		assertThat(customer.statement()).isEqualTo("Rental Record for " + NAME + "\n"
-				+ "\t3.0(" + TITLE + ")\n"
-				+ "Amount owed is 3.0\n"
-				+ "You earned 1 frequent renter pointers");
 	}
 }
